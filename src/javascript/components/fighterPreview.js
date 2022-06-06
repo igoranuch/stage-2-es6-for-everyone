@@ -4,7 +4,7 @@ export function createFighterPreview(fighter, position) {
   const positionClassName = position === 'right' ? 'fighter-preview___right' : 'fighter-preview___left';
   const fighterElement = createElement({
     tagName: 'div',
-    className: `fighter-preview___root ${positionClassName}`,
+    className: `fighter-preview___root ${positionClassName}`
   });
 
   // todo: show fighter info (image, name, health, etc.)
@@ -14,15 +14,15 @@ export function createFighterPreview(fighter, position) {
 
 export function createFighterImage(fighter) {
   const { source, name } = fighter;
-  const attributes = { 
-    src: source, 
+  const attributes = {
+    src: source,
     title: name,
-    alt: name 
+    alt: name
   };
   const imgElement = createElement({
     tagName: 'img',
     className: 'fighter-preview___img',
-    attributes,
+    attributes
   });
 
   return imgElement;
