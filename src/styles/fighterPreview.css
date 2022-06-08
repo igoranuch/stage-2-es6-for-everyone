@@ -5,9 +5,28 @@
 }
 
 .fighter-preview___right {
-  align-items: flex-end;
+  align-items: center;
 }
 
 .fighter-preview___left {
-  align-items: flex-start;
+  align-items: center;
+}
+
+.fighter-preview___img {
+  height: 250px;
+}
+
+.fighter-preview__info {
+  text-align: center;
+  font-family: 'Arial Black';
+  background-color: #ffdfa7;
+  border: 3px solid #ca9650;
+  width: 150px;
+  margin-top: 1rem;
+  padding: 0.5rem;
+}
+
+.fighter-preview___right .fighter-preview___img {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }

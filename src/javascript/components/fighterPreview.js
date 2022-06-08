@@ -8,7 +8,12 @@ export function createFighterPreview(fighter, position) {
   });
   // todo: show fighter info (image, name, health, etc.)
   if (fighter) {
-    fighterElement.innerText = `Name:${fighter.name}\nHealth: ${fighter.health}\nAttack:${fighter.attack}\nDefense: ${fighter.defense}`;
+    let fighterImage = createFighterImage(fighter);
+    let fighterInfo = createElement({ tagName: 'div', className: 'fighter-preview__info' });
+    fighterInfo.innerText = `Name: ${fighter.name}\nHealth: ${fighter.health}\nAttack: ${fighter.attack}\nDefense: ${fighter.defense}`;
+
+    fighterElement.appendChild(fighterImage);
+    fighterElement.appendChild(fighterInfo);
   }
 
   return fighterElement;
