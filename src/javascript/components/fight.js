@@ -8,12 +8,14 @@ export async function fight(firstFighter, secondFighter) {
 
     const firstFighterInstance = {
       healthPercent: 100 / firstFighter.health,
-      health: firstFighter.health
+      health: firstFighter.health,
+      crit: true
     };
 
     const secondFighterInstance = {
       healthPercent: 100 / secondFighter.health,
-      health: secondFighter.health
+      health: secondFighter.health,
+      crit: true
     };
 
     let keysPressed = {};
@@ -25,6 +27,7 @@ export async function fight(firstFighter, secondFighter) {
 
     document.addEventListener('keydown', (event) => {
       keysPressed[event.code] = true;
+
       if (isFight) {
         if (!keysPressed[controls.PlayerTwoBlock]) {
           if (event.code == controls.PlayerOneAttack && !event.repeat && !keysPressed[controls.PlayerOneBlock]) {
@@ -40,6 +43,34 @@ export async function fight(firstFighter, secondFighter) {
           }
         }
 
+        if (
+          controls.PlayerOneCriticalHitCombination.every((key) => keysPressed.hasOwnProperty(key)) &&
+          !event.repeat &&
+          !keysPressed[controls.PlayerOneBlock] &&
+          firstFighterInstance.crit
+        ) {
+          secondFighterInstance.health -= getCriticalHit(firstFighter);
+          secondFighterHealth.style.width = secondFighterInstance.health * secondFighterInstance.healthPercent + '%';
+          firstFighterInstance.crit = false;
+          setTimeout(() => {
+            firstFighterInstance.crit = true;
+          }, 10000);
+        }
+
+        if (
+          controls.PlayerTwoCriticalHitCombination.every((key) => keysPressed.hasOwnProperty(key)) &&
+          !event.repeat &&
+          !keysPressed[controls.PlayerTwoBlock] &&
+          secondFighterInstance.crit
+        ) {
+          firstFighterInstance.health -= getCriticalHit(secondFighter);
+          firstFighterHealth.style.width = firstFighterInstance.health * firstFighterInstance.healthPercent + '%';
+          secondFighterInstance.crit = false;
+          setTimeout(() => {
+            secondFighterInstance.crit = true;
+          }, 10000);
+        }
+
         if (firstFighterInstance.health <= 0) {
           firstFighterHealth.style.width = 0 + '%';
           isFight = false;
@@ -51,7 +82,6 @@ export async function fight(firstFighter, secondFighter) {
           isFight = false;
           resolve(firstFighter);
         }
-        //remove event listener after end fight
       }
     });
   });
