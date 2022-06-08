@@ -25,6 +25,7 @@ export async function fight(firstFighter, secondFighter) {
 
     document.addEventListener('keydown', (event) => {
       keysPressed[event.code] = true;
+
       if (isFight) {
         if (!keysPressed[controls.PlayerTwoBlock]) {
           if (event.code == controls.PlayerOneAttack && !event.repeat && !keysPressed[controls.PlayerOneBlock]) {
@@ -38,6 +39,24 @@ export async function fight(firstFighter, secondFighter) {
             firstFighterInstance.health -= getDamage(secondFighter, firstFighter);
             firstFighterHealth.style.width = firstFighterInstance.health * firstFighterInstance.healthPercent + '%';
           }
+        }
+
+        if (
+          controls.PlayerOneCriticalHitCombination.every((key) => keysPressed.hasOwnProperty(key)) &&
+          !event.repeat &&
+          !keysPressed[controls.PlayerOneBlock]
+        ) {
+          secondFighterInstance.health -= getCriticalHit(firstFighter);
+          secondFighterHealth.style.width = secondFighterInstance.health * secondFighterInstance.healthPercent + '%';
+        }
+
+        if (
+          controls.PlayerTwoCriticalHitCombination.every((key) => keysPressed.hasOwnProperty(key)) &&
+          !event.repeat &&
+          !keysPressed[controls.PlayerTwoBlock]
+        ) {
+          firstFighterInstance.health -= getCriticalHit(secondFighter);
+          firstFighterHealth.style.width = firstFighterInstance.health * firstFighterInstance.healthPercent + '%';
         }
 
         if (firstFighterInstance.health <= 0) {
