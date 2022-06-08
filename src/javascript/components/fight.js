@@ -10,9 +10,8 @@ export async function fight(firstFighter, secondFighter) {
 
 export function getDamage(attacker, defender) {
   // return damage
-  if (getHitPower(attacker) <= getBlockPower(defender)) {
-    return 0;
-  } else return getHitPower(attacker) - getBlockPower(defender);
+  const damage = getHitPower(attacker) - getBlockPower(defender);
+  return damage > 0 ? damage : 0;
 }
 
 export function getHitPower(fighter) {
@@ -30,5 +29,6 @@ export function getBlockPower(fighter) {
 }
 
 export function getCriticalHit(fighter) {
+  // return critical hit power
   return fighter.attack * 2;
 }
