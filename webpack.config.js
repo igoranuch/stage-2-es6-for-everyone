@@ -1,5 +1,5 @@
 const path = require('path');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './index.js',
@@ -15,9 +15,9 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         use: [
           {
-            loader: "babel-loader",
+            loader: 'babel-loader',
             options: {
-              configFile: "./babel.config.js",
+              configFile: './babel.config.js',
               cacheDirectory: true
             }
           }
@@ -25,13 +25,13 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader"
+            loader: 'html-loader'
           }
         ]
       },
@@ -43,12 +43,12 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "index.html"
+      template: 'index.html'
     })
   ],
   mode: 'development',
   devServer: {
-    port: 9000
+    port: 5500
   },
-  devtool: "source-map"
-}
+  devtool: 'source-map'
+};
